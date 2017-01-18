@@ -47,23 +47,24 @@ Swiper wrapper for polymer
           type: Object,
         },
       },
-      listeners: {
-        'dom-change': 'attached',
+      ready: function() {
+        var boundHandler = this._childrenChanged.bind(this);
+        this._observer = Polymer.dom(this.$.myContent).observeNodes(boundHandler);
       },
-      attached: function() {
-        var distributed = this.getContentChildren('#myContent');
-        for (var i = 0; i < distributed.length; i++) {
-          console.log(distributed[i]);
+      _childrenChanged: function(info) {
+        var nodes = info.addedNodes.filter(function(node) {
+          return (node.nodeType === Node.ELEMENT_NODE && node.tagName != "TEMPLATE")
+        });
+        for (var i = 0; i < nodes.length; i++) {
           var swiperSlide = document.createElement('div');
           swiperSlide.setAttribute("class","swiper-slide");
-          Polymer.dom(swiperSlide).appendChild(distributed[i]);
+          Polymer.dom(swiperSlide).appendChild(nodes[i]);
           Polymer.dom(this.$.wrapper).appendChild(swiperSlide);
         }
         if(this.options == undefined) {
           this.options = {};
         }
         var mySwiper = new Swiper('.swiper-container', this.options);
-        // window.swiper = mySwiper;
       },
     });
   </script>
