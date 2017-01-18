@@ -4,6 +4,7 @@
   "main": "enrico-swiper.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.0.0",
     "swiper": "latest"
   },
   "devDependencies": {

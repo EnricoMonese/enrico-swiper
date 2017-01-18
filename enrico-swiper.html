@@ -1,4 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../iron-icons/hardware-icons.html">
 
 <link rel="import" href="swiper-styles.html">
 <script src="../swiper/dist/js/swiper.min.js"></script>
@@ -19,18 +21,34 @@ Swiper wrapper for polymer
       #myContent {
         display: none;
       }
+      .button-prev, .button-next {
+        color: white;
+        z-index: 1;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top: 50%;
+        transform: translate3d(0px, -50%, 0);
+      }
+      .button-next {
+        right: 5px;
+        left: auto;
+      }
+      .button-prev {
+        right: auto;
+        left: 5px;
+      }
     </style>
 
     <content id="myContent" hidden></content>
     <!-- Slider main container -->
     <div class="swiper-container">
       <!-- Additional required wrapper -->
-      <div class="swiper-wrapper" id="wrapper">
-      </div>
+      <div class="swiper-wrapper" id="wrapper"> </div>
       <div class="swiper-pagination"></div>
 
-      <div class="swiper-button-prev"></div>
-      <div class="swiper-button-next"></div>
+      <paper-icon-button class="button-next" icon="hardware:keyboard-arrow-right" on-tap="slideNext"></paper-icon-button>
+      <paper-icon-button class="button-prev" icon="hardware:keyboard-arrow-left" on-tap="slidePrev"></paper-icon-button>
 
       <div class="swiper-scrollbar"></div>
     </div>
@@ -64,7 +82,13 @@ Swiper wrapper for polymer
         if(this.options == undefined) {
           this.options = {};
         }
-        var mySwiper = new Swiper('.swiper-container', this.options);
+        this.mySwiper = new window.Swiper('.swiper-container', this.options);
+      },
+      slideNext: function() {
+        this.mySwiper.slideNext();
+      },
+      slidePrev: function() {
+        this.mySwiper.slidePrev();
       },
     });
   </script>
