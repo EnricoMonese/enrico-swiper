@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 
+<link rel="import" href="swiper-styles.html">
+<script src="../swiper/dist/js/swiper.min.js"></script>
 <!--
 `enrico-swiper`
 Swiper wrapper for polymer
@@ -8,13 +10,34 @@ Swiper wrapper for polymer
 -->
 
 <dom-module id="enrico-swiper">
+
   <template>
-    <style>
+    <style include="swiper-styles">
       :host {
         display: block;
       }
+      #myContent {
+        display: none;
+      }
     </style>
-    <h2>Hello [[prop1]]</h2>
+
+    <content id="myContent" hidden></content>
+
+    <!-- Slider main container -->
+    <div class="swiper-container">
+      <!-- Additional required wrapper -->
+      <div class="swiper-wrapper" id="wrapper">
+        <!-- Slides -->
+        <!-- <div class="swiper-slide">Slide 0</div> -->
+      </div>
+      <div class="swiper-pagination"></div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <div class="swiper-scrollbar"></div>
+    </div>
+
   </template>
 
   <script>
@@ -23,12 +46,28 @@ Swiper wrapper for polymer
       is: 'enrico-swiper',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'enrico-swiper',
+        options: {
+          type: Object,
         },
       },
-
+      listeners: {
+        'dom-change': 'attached',
+      },
+      attached: function() {
+        var distributed = this.getContentChildren('#myContent');
+        for (var i = 0; i < distributed.length; i++) {
+          console.log(distributed[i]);
+          var swiperSlide = document.createElement('div');
+          swiperSlide.setAttribute("class","swiper-slide");
+          Polymer.dom(swiperSlide).appendChild(distributed[i]);
+          Polymer.dom(this.$.wrapper).appendChild(swiperSlide);
+        }
+        if(this.options == undefined) {
+          this.options = {};
+        }
+        var mySwiper = new Swiper('.swiper-container', this.options);
+        // window.swiper = mySwiper;
+      },
     });
   </script>
 </dom-module>
