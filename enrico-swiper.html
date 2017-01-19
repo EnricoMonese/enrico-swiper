@@ -41,8 +41,8 @@
       <div class="swiper-wrapper" id="wrapper"> </div>
       <!-- <div class="swiper-pagination"></div> -->
 
-      <paper-icon-button class="wiper-slide-next button-next" icon="hardware:keyboard-arrow-right" on-tap="slideNext"></paper-icon-button>
-      <paper-icon-button class="wiper-slide-prev button-prev" icon="hardware:keyboard-arrow-left" on-tap="slidePrev"></paper-icon-button>
+      <paper-icon-button class="wiper-slide-next button-next" id="next" icon="hardware:keyboard-arrow-right"></paper-icon-button>
+      <paper-icon-button class="wiper-slide-prev button-prev" id="prev" icon="hardware:keyboard-arrow-left"></paper-icon-button>
 
       <!-- <div class="swiper-scrollbar"></div> -->
     </div>
@@ -86,13 +86,9 @@
         if(this.options == undefined) {
           this.options = {};
         }
+        this.options.prevButton = this.$.prev;
+        this.options.nextButton = this.$.next;
         this.mySwiper = new window.Swiper('.swiper-container', this.options);
-      },
-      slideNext: function() {
-        this.mySwiper.slideNext();
-      },
-      slidePrev: function() {
-        this.mySwiper.slidePrev();
       },
     });
   </script>
