@@ -88,7 +88,7 @@
         });
         for (var i = 0; i < nodes.length; i++) {
           var swiperSlide = document.createElement('div');
-          swiperSlide.setAttribute("class","swiper-slide");
+          swiperSlide.setAttribute("class",(this.options.slideClass != undefined) ? this.options.slideClass : "swiper-slide");
           Polymer.dom(swiperSlide).appendChild(nodes[i]);
           Polymer.dom(this.$.wrapper).appendChild(swiperSlide);
         }
