@@ -88,6 +88,11 @@
         }
         this.options.prevButton = this.$.prev;
         this.options.nextButton = this.$.next;
+
+        if(this.mySwiper != undefined) {
+          this.mySwiper.destroy();
+        }
+
         this.mySwiper = new window.Swiper(this.$.swiper, this.options);
       },
     });
