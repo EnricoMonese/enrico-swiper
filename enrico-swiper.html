@@ -36,7 +36,7 @@
 
     <content id="myContent" hidden></content>
     <!-- Slider main container -->
-    <div class="swiper-container">
+    <div class="swiper-container" id="swiper">
       <!-- Additional required wrapper -->
       <div class="swiper-wrapper" id="wrapper"> </div>
       <!-- <div class="swiper-pagination"></div> -->
@@ -88,7 +88,7 @@
         }
         this.options.prevButton = this.$.prev;
         this.options.nextButton = this.$.next;
-        this.mySwiper = new window.Swiper('.swiper-container', this.options);
+        this.mySwiper = new window.Swiper(this.$.swiper, this.options);
       },
     });
   </script>
