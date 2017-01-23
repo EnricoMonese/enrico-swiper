@@ -68,16 +68,6 @@
           type: Object,
         },
       },
-      listeners: {
-        'track': 'preventTrack'
-      },
-      preventTrack: function (e) {
-        if (!e) {
-          return e;
-        }
-        e.cancelBubble = true;
-        e.preventDefault();
-      },
       ready: function() {
         var boundHandler = this._childrenChanged.bind(this);
         this._observer = Polymer.dom(this.$.myContent).observeNodes(boundHandler);
