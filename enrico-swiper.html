@@ -41,18 +41,19 @@
       #swiper {
         @apply(--enrico-swiper);
       }
+
     </style>
 
-    <content id="myContent" hidden></content>
     <!-- Slider main container -->
     <div class="swiper-container" id="swiper">
       <!-- Additional required wrapper -->
-      <div class="swiper-wrapper" id="wrapper"> </div>
-      <!-- <div class="swiper-pagination"></div> -->
-
+      <div class="swiper-wrapper" id="wrapper">
+        <content id="myContent"></content>
+      </div>
       <paper-icon-button class="swiper-slide-next button-next" id="next" icon="hardware:keyboard-arrow-right"></paper-icon-button>
       <paper-icon-button class="swiper-slide-prev button-prev" id="prev" icon="hardware:keyboard-arrow-left"></paper-icon-button>
 
+      <div class="swiper-pagination" id="pagination"></div>
       <!-- <div class="swiper-scrollbar"></div> -->
     </div>
 
@@ -68,30 +69,34 @@
           type: Object,
         },
       },
-      ready: function() {
-        var boundHandler = this._childrenChanged.bind(this);
-        this._observer = Polymer.dom(this.$.myContent).observeNodes(boundHandler);
+      listeners: {
+        'dom-change': 'attached'
       },
-      _childrenChanged: function(info) {
-        var nodes = info.addedNodes.filter(function(node) {
-          return (node.nodeType === Node.ELEMENT_NODE && node.tagName != "TEMPLATE")
-        });
-        for (var i = 0; i < nodes.length; i++) {
-          var swiperSlide = document.createElement('div');
-          swiperSlide.setAttribute("class",(this.options.slideClass != undefined) ? this.options.slideClass : "swiper-slide");
-          Polymer.dom(swiperSlide).appendChild(nodes[i]);
-          Polymer.dom(this.$.wrapper).appendChild(swiperSlide);
+      attached: function() {
+        if (this._initializer) {
+          clearTimeout(this._initializer);
         }
-        if(this.options == undefined) {
-          this.options = {};
-        }
-        this.options.prevButton = this.$.prev;
-        this.options.nextButton = this.$.next;
+        this._initializer = setTimeout(function () {
+          var nodes = this.getContentChildren('#myContent');
+          for (var i = 0; i < nodes.length; i++) {
+            nodes[i].setAttribute("class",(this.options.slideClass != undefined) ? this.options.slideClass : "swiper-slide");
+          }
+          if(this.options == undefined) {
+            this.options = {};
+          }
+          this.options.wrapper = this.$.wrapper;
+          this.options.prevButton = this.$.prev;
+          this.options.nextButton = this.$.next;
+          this.options.pagination = this.$.pagination;
+          this.options.paginationHide = false;
 
+          this.render();
+        }.bind(this), 10);
+      },
+      render: function() {
         if(this.mySwiper != undefined) {
           this.mySwiper.destroy();
         }
-
         this.mySwiper = new window.Swiper(this.$.swiper, this.options);
       },
     });
