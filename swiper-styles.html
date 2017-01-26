@@ -195,7 +195,7 @@
       width: 100%;
     }
     /* Bullets */
-    .swiper-pagination-bullet {
+    ::shadow .swiper-pagination-bullet {
       width: 8px;
       height: 8px;
       display: inline-block;
@@ -203,7 +203,7 @@
       background: #000;
       opacity: 0.2;
     }
-    button.swiper-pagination-bullet {
+    ::shadow button.swiper-pagination-bullet {
       border: none;
       margin: 0;
       padding: 0;
@@ -213,23 +213,23 @@
       -webkit-appearance: none;
       appearance: none;
     }
-    .swiper-pagination-clickable .swiper-pagination-bullet {
+    ::shadow .swiper-pagination-clickable .swiper-pagination-bullet {
       cursor: pointer;
     }
-    .swiper-pagination-white .swiper-pagination-bullet {
+    ::shadow .swiper-pagination-white .swiper-pagination-bullet {
       background: #fff;
     }
-    .swiper-pagination-bullet-active {
+    ::shadow .swiper-pagination-bullet-active {
       opacity: 1;
-      background: #007aff;
+      background: var(--enrico-swiper-bullet-active-color,#007aff);
     }
-    .swiper-pagination-white .swiper-pagination-bullet-active {
+    ::shadow .swiper-pagination-white .swiper-pagination-bullet-active {
       background: #fff;
     }
-    .swiper-pagination-black .swiper-pagination-bullet-active {
+    ::shadow .swiper-pagination-black .swiper-pagination-bullet-active {
       background: #000;
     }
-    .swiper-container-vertical > .swiper-pagination-bullets {
+    .swiper-container-vertical > ::shadow .swiper-pagination-bullets {
       right: 10px;
       top: 50%;
       -webkit-transform: translate3d(0px, -50%, 0);
@@ -238,11 +238,11 @@
       -ms-transform: translate3d(0px, -50%, 0);
       transform: translate3d(0px, -50%, 0);
     }
-    .swiper-container-vertical > .swiper-pagination-bullets .swiper-pagination-bullet {
+    .swiper-container-vertical > ::shadow .swiper-pagination-bullets .swiper-pagination-bullet {
       margin: 5px 0;
       display: block;
     }
-    .swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+    .swiper-container-horizontal > ::shadow .swiper-pagination-bullets .swiper-pagination-bullet {
       margin: 0 5px;
     }
     /* Progress */
